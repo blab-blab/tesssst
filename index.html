@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Airtable Single Value</title>
+</head>
+<body>
+  <h3>Table Name:</h3>
+  <div id="output">Loading...</div>
+
+  <script>
+    fetch("https://api.airtable.com/v0/appSkjMOZErTCaW06/Database%20Management/reckbI8hW5zCFcuta", {
+      headers: {
+        Authorization: "Bearer patdmue1oL1GhGoYt.36deb0e63962da71958afbed8156984abae1fe820d93d8cc130b2f64a1823d22"  // Replace with your actual PAT
+      }
+    })
+    .then(response => {
+      console.log("Status:", response.status);
+      if (!response.ok) throw new Error("HTTP error " + response.status);
+      return response.json();
+    })
+    .then(data => {
+      console.log("API Response:", data);
+      const value = data.fields["AAAA"];
+      document.getElementById("output").innerText = value || "Field not found";
+    })
+    .catch(err => {
+      console.error("Fetch error:", err);
+      document.getElementById("output").innerText = "Error loading data";
+    });
+  </script>
+</body>
+</html>
